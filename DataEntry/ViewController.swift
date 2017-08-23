@@ -8,11 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var displayLabel: UILabel!
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    //MARK: Properties
+    var components = [[String]]()
+    var resultString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +29,21 @@ class ViewController: UIViewController {
     }
     
     //MARK: Actions
-    
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
     }
 
+    //MARK: Delegates and data sources
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return components.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return components[component].count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return components[component][row]
+    }
 
 }
 
